@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script src="bower_components/webcomponentsjs/webcomponents.js"></script>
+    <script async>
+        function handleError(event) {
+          console.log('Error: ' + event.target.href);
+        }
+    </script>
+    <link rel="import" href="hello-world.html" onerror="handleError(event)" />
+    <meta charset="utf-8">
+    <title>WebComponent Hello World</title>
+  </head>
+  <body>
+    <hello-world></hello-world>
+  </body>
+</html>

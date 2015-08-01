@@ -1,0 +1,48 @@
+<template id="hello">
+  <h1>Web Components hello world</h1>
+</template>
+
+<script>
+var helloWorld = Object.create(HTMLElement.prototype, {
+  createdCallback: {
+    value:function() {
+      this.shadowRoot = this.createShadowRoot();
+      this.generate();
+    }
+  },
+  generate: {
+    value:function() {
+      // Create components and container
+      var label = document.createElement('label');
+      var input = document.createElement('input');
+      var button = document.createElement('button');
+      var greetingContainer = document.createElement('div');
+      var container = document.createElement('div');
+
+      container.appendChild(label);
+      container.appendChild(input);
+      container.appendChild(button);
+      container.appendChild(greetingContainer);
+
+      label.value = 'Your name: ';
+      input.type = 'text';
+      input.id = 'hello-world-name';
+      button.textContent = 'Say hello';
+      button.addEventListener('click', function(event) {
+        while (greetingContainer.firstChild) {
+            greetingContainer.removeChild(greetingContainer.firstChild);
+        }
+        var greeting = document.createElement('p');
+        greeting.textContent = 'Hello, ' + input.value;
+        greetingContainer.appendChild(greeting);
+        input.value = '';
+      });
+
+      this.shadowRoot.appendChild(container);
+    }
+  }
+});
+
+var HelloWorld = document.registerElement('hello-world', {prototype:helloWorld});
+//    document.body.appendChild(new HelloWorld());
+</script>
